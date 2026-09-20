@@ -1,0 +1,13 @@
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
+[core]
+	editor = nvim
+[alias]
+	st = status --short
+	co = checkout
+	br = branch
+	lg = log --oneline --graph --decorate --all
