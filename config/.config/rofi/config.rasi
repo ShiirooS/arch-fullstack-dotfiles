@@ -1,0 +1,43 @@
+configuration {
+  show-icons: true;
+  modi: "drun,run,window";
+  font: "JetBrainsMono Nerd Font 11";
+}
+
+* {
+  bg: #1e1e2e;
+  bg-alt: #313244;
+  fg: #cdd6f4;
+  accent: #cba6f7;
+}
+
+window {
+  width: 42%;
+  padding: 16px;
+  background-color: @bg;
+}
+
+inputbar {
+  padding: 10px;
+  background-color: @bg-alt;
+}
+
+entry {
+  text-color: @fg;
+}
+
+listview {
+  lines: 8;
+  columns: 1;
+  margin: 10px 0 0 0;
+}
+
+element {
+  padding: 8px;
+  text-color: @fg;
+}
+
+element selected {
+  background-color: @accent;
+  text-color: @bg;
+}
