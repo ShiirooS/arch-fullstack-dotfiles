@@ -1,43 +1,86 @@
 configuration {
-  show-icons: true;
-  modi: "drun,run,window";
-  font: "JetBrainsMono Nerd Font 11";
+    scroll-method: 1;
+    scrollbar: true;
+    show-icons: true;
+    display-run: "Run ";
+    display-drun: "Open ";
+    display-emoji: "Emoji ";
+    drun-display-format: "{icon} {name}";
+    modi: "run,drun,emoji";
 }
+
+@import "~/.config/colors/colors.rasi"
 
 * {
-  bg: #1e1e2e;
-  bg-alt: #313244;
-  fg: #cdd6f4;
-  accent: #cba6f7;
+    font: "JetbrainsMono Nerd Font 15";
 }
 
-window {
-  width: 42%;
-  padding: 16px;
-  background-color: @bg;
+#window {
+    background-color: @background;
+    border:           3;
+    border-radius:    6;
+    border-color:     @bordercolor;
+    padding:          15;
+    width:            600px;
+}
+#listview {
+    lines:        6;
+    fixed-height: 0;
+    border:       0px;
+    spacing:      2px ;
+    padding:      2px 0px 0px ;
 }
 
-inputbar {
-  padding: 10px;
-  background-color: @bg-alt;
+#element {
+    border:        0;
+    border-radius: 8px;
+    padding:       3px;
+}
+#element.normal.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+#element.alternate.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+#element.selected.normal {
+    background-color: @selected-background;
+    text-color:       @foreground;
+}
+element-text, element-icon {
+    size:             45px;
+    background-color: inherit;
+    text-color:       inherit;
 }
 
-entry {
-  text-color: @fg;
+#scrollbar {
+    width:        2px ;
+    border:       0;
+    handle-width: 8px ;
+    padding:      0;
+    handle-color: @select;
 }
 
-listview {
-  lines: 8;
-  columns: 1;
-  margin: 10px 0 0 0;
+#inputbar {
+    children:   [ prompt, textbox-prompt-colon, entry ];
+    spacing:       0;
+    padding:       15px;
+    border:        3px;
+    border-radius: 6px;
+    border-color:  @bordercolor;
 }
-
-element {
-  padding: 8px;
-  text-color: @fg;
+#prompt {
+    spacing:    0;
+    text-color: @foreground;
 }
-
-element selected {
-  background-color: @accent;
-  text-color: @bg;
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ">";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @foreground;
+}
+#entry {
+    spacing:    0;
+    text-color: @foreground;
 }
