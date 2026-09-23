@@ -1,0 +1,139 @@
+# Instalacion paso a paso
+
+Todos los comandos, en orden, para dejar el sistema igual que el repo. Los que
+llevan `sudo` piden contrasena y hay que correrlos en una terminal real.
+
+## 1. Clonar el repo
+
+```bash
+git clone https://github.com/ShiirooS/arch-fullstack-dotfiles.git ~/dotfiles
+cd ~/dotfiles
+```
+
+El repo asume que vive en `~/dotfiles` (los wallpapers se referencian desde ahi).
+
+## 2. Paquetes
+
+```bash
+./scripts/bootstrap.sh --dry-run   # ver que va a hacer
+./scripts/bootstrap.sh             # hace todo lo de abajo en orden
+```
+
+O por partes:
+
+```bash
+sudo pacman -Syu
+./scripts/install-packages.sh packages/base.pkglist
+./scripts/install-packages.sh packages/desktop-hyprland.pkglist
+./scripts/install-aur-helper.sh                     # instala yay si no hay helper
+./scripts/install-packages.sh packages/aur.pkglist  # wlogout, oh-my-posh-bin
+./scripts/install-packages.sh packages/dev-fullstack.pkglist
+```
+
+`packages/optional.pkglist` no se instala solo; son apps de AUR a eleccion:
+
+```bash
+yay -S --needed $(grep -vE '^\s*(#|$)' packages/optional.pkglist)
+```
+
+## 3. Enlazar dotfiles
+
+```bash
+./scripts/stow.sh
+```
+
+- Enlaza los paquetes `config shell tmux git nvim claude` en `$HOME`.
+- Si un archivo real ya ocupa el lugar de un link, lo mueve a `<archivo>.bak-<fecha>` antes de enlazar.
+- Si Hyprland genero un `~/.config/hypr/hyprland.lua` por defecto, tambien lo respalda. Hyprland >= 0.55 prefiere `hyprland.lua` sobre `hyprland.conf`, asi que ese archivo tapaba toda la config del repo.
+
+Verificar la config de Hyprland sin arrancarlo:
+
+```bash
+Hyprland --verify-config -c ~/.config/hypr/hyprland.conf
+```
+
+## 4. Servicios y sistema
+
+```bash
+sudo systemctl enable --now NetworkManager bluetooth earlyoom
+sudo systemctl enable sddm                 # login grafico
+sudo timedatectl set-timezone <Region/Ciudad>   # ej. America/Argentina/Buenos_Aires
+```
+
+La zona horaria importa: el reloj de waybar y las horas de reinicio de la barra de
+Claude Code se muestran en hora local.
+
+## 5. Claude Code: barra de estado con oh-my-posh
+
+El tema vive en el repo (`claude/.config/ohmyposh/claude.toml`, enlazado por
+`stow.sh`). `~/.claude/settings.json` no se enlaza porque Claude Code lo reescribe;
+agregar a mano:
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "oh-my-posh claude --config ~/.config/ohmyposh/claude.toml",
+  "padding": 0
+}
+```
+
+Muestra: modelo, contexto usado (gauge, % y tokens libres), limite de 5 horas
+(% usado y hora de reinicio), limite semanal (% usado y dia/hora de reinicio) y un
+gatito al final. Los limites vienen como porcentaje del plan, no en tokens.
+
+Probar el tema sin reiniciar Claude Code:
+
+```bash
+echo '{"model":{"display_name":"Test"},"context_window":{"context_window_size":200000,"used_percentage":10}}' \
+  | oh-my-posh claude --config ~/.config/ohmyposh/claude.toml
+```
+
+## 6. Despues del primer login
+
+Cerrar sesion y volver a entrar (SDDM, sesion "Hyprland"). Deberia verse:
+
+- wallpaper (`hyprpaper`), waybar arriba, notificaciones (swaync), applet de red;
+- tema oscuro en apps GTK y Qt, iconos Papirus;
+- bloqueo automatico a los 5 min (`hypridle`).
+
+Chequeos rapidos:
+
+```bash
+hyprctl hyprpaper listactive                      # wallpaper activo
+pgrep -a 'waybar|swaync|hypridle|hyprpaper|polkit-gnome'
+notify-send "Prueba" "notificaciones OK"
+```
+
+## Atajos de teclado
+
+Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en rofi).
+
+| Atajo | Accion |
+| --- | --- |
+| `SUPER + H` | Ver atajos de teclado |
+| `SUPER + Space` | Terminal (ghostty) |
+| `SUPER + E` | Gestor de archivos (thunar) |
+| `SUPER + B` | Navegador (chromium) |
+| `SUPER + R` / `Alt + Space` | Lanzador de apps (rofi) |
+| `SUPER + .` | Selector de emojis |
+| `SUPER + V` | Historial del portapapeles |
+| `SUPER + W` | Elegir wallpaper |
+| `SUPER + Shift + W` | Wallpaper aleatorio |
+| `SUPER + N` | Centro de notificaciones |
+| `SUPER + L` | Bloquear pantalla |
+| `SUPER + Escape` | Menu de apagado (wlogout) |
+| `SUPER + Shift + S` | Captura de region |
+| `Print` | Captura de pantalla completa |
+| `SUPER + Shift + E` | Captura y editar con swappy |
+| `SUPER + Q` | Cerrar ventana |
+| `SUPER + Shift + Q` | Matar ventana |
+| `SUPER + F` | Alternar flotante |
+| `SUPER + P` | Pseudotile |
+| `SUPER + J` | Alternar split |
+| `SUPER + 1..0` | Ir al workspace 1..10 |
+| `SUPER + Shift + 1..0` | Mover ventana al workspace 1..10 |
+| `SUPER + flechas` | Mover foco |
+| `SUPER + click izq/der` | Mover / redimensionar ventana |
+| `SUPER + Shift + Control + Escape` | Salir de Hyprland |
+
+Las capturas se guardan en `~/Pictures/Screenshots`.

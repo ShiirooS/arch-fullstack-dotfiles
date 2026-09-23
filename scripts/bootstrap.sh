@@ -19,6 +19,7 @@ steps=(
   "sudo systemctl enable --now NetworkManager"
   "sudo systemctl enable --now bluetooth"
   "sudo systemctl enable --now earlyoom"
+  "sudo systemctl enable sddm"
 )
 
 echo "Arch Fullstack Dotfiles bootstrap"

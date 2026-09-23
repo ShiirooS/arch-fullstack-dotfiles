@@ -1,0 +1,47 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+# Statusline de Claude Code (Catppuccin Mocha). Uso: oh-my-posh claude --config <este archivo>
+
+version = 3
+final_space = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  # Modelo
+  [[blocks.segments]]
+    type = 'claude'
+    style = 'plain'
+    foreground = '#cba6f7'
+    template = '󰚩 {{ .Model.DisplayName }} '
+
+  # Contexto: gauge de lo usado, % y tokens libres
+  [[blocks.segments]]
+    type = 'claude'
+    style = 'plain'
+    foreground = '#89b4fa'
+    template = '<#585b70>│</> 󰍛 {{ .TokenGaugeUsed }} {{ .TokenUsagePercent.String }}%{{ if .ContextWindow.CurrentUsage }} · {{ div (sub .ContextWindow.ContextWindowSize (add .ContextWindow.CurrentUsage.InputTokens .ContextWindow.CurrentUsage.CacheCreationInputTokens .ContextWindow.CurrentUsage.CacheReadInputTokens)) 1000 }}K libres{{ end }} '
+    [blocks.segments.options]
+      gauge_marked_char = '▰'
+      gauge_unmarked_char = '▱'
+
+  # Limite de 5 horas: % usado y hora de reinicio (hora local)
+  [[blocks.segments]]
+    type = 'claude'
+    style = 'plain'
+    foreground = '#a6e3a1'
+    template = '{{ if gt .FiveHourResetsIn 0 }}<#585b70>│</> 󰥔 5h {{ .FiveHourUsage.String }}% ↻ {{ .FiveHourResetsAt.Local.Format "15:04" }} {{ end }}'
+
+  # Limite semanal: % usado y dia/hora de reinicio
+  [[blocks.segments]]
+    type = 'claude'
+    style = 'plain'
+    foreground = '#fab387'
+    template = '{{ if gt .SevenDayResetsIn 0 }}<#585b70>│</> 󰃭 7d {{ .SevenDayUsage.String }}% ↻ {{ .SevenDayResetsAt.Local.Format "02/01 15:04" }} {{ end }}'
+
+  # Gatito
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = '#f5c2e7'
+    template = '<#585b70>│</> 󰄛'

@@ -2,6 +2,7 @@ hyprland
 hyprpaper
 xdg-desktop-portal-hyprland
 waybar
+rofi
 ghostty
 swaync
 hyprlock
@@ -9,6 +10,7 @@ hypridle
 grim
 slurp
 swappy
+hyprshot
 wl-clipboard
 cliphist
 polkit-gnome

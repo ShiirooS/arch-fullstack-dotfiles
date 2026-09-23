@@ -1,3 +1,3 @@
 # Paquetes de AUR (requieren un helper como yay o paru, no estan en pacman oficial)
-rofi-wayland
 wlogout
+oh-my-posh-bin

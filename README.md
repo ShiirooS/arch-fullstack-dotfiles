@@ -48,10 +48,17 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 │   └── stow.sh
 ├── config/
 │   └── .config/
+│       ├── colors/        # paleta Catppuccin compartida (css/rasi)
 │       ├── ghostty/
-│       ├── hypr/
+│       ├── gtk-3.0/ gtk-4.0/ qt6ct/ Kvantum/   # tema oscuro GTK/Qt
+│       ├── hypr/          # hyprland, hyprlock, hypridle, hyprpaper, scripts/
 │       ├── rofi/
-│       └── waybar/
+│       ├── swaync/
+│       ├── waybar/
+│       └── wlogout/
+├── claude/
+│   └── .config/ohmyposh/claude.toml   # statusline de Claude Code
+├── wallpapers/
 ├── shell/
 │   └── .zshrc
 ├── tmux/
@@ -64,7 +71,8 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 
 ## Instalacion propuesta
 
-Desde el directorio del repo:
+La guia completa, con todos los comandos y la tabla de atajos, esta en
+[INSTALL.md](INSTALL.md). Resumen, desde el directorio del repo:
 
 ```bash
 ./scripts/bootstrap.sh --dry-run
@@ -83,7 +91,7 @@ O por partes:
 ```
 
 `packages/aur.pkglist` contiene paquetes que no estan en pacman oficial (por ejemplo
-`rofi-wayland`, `wlogout`). `install-aur-helper.sh` instala `yay` desde AUR (build con
+`wlogout`, `oh-my-posh-bin`). `install-aur-helper.sh` instala `yay` desde AUR (build con
 `makepkg`, sin `curl | bash`) si no hay ya un helper (`yay`/`paru`) presente; luego
 `install-packages.sh` detecta que el pkglist es `aur.pkglist` y usa ese helper en vez
 de `pacman` directo.
