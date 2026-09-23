@@ -14,6 +14,8 @@ cliphist
 polkit-gnome
 qt5-wayland
 qt6-wayland
+qt6ct
+kvantum
 gtk3
 gtk4
 nwg-look
@@ -24,3 +26,4 @@ thunar
 thunar-archive-plugin
 file-roller
 rofi-emoji
+chromium
