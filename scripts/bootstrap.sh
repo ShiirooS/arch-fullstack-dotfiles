@@ -16,10 +16,13 @@ steps=(
   "$repo_root/scripts/install-packages.sh $repo_root/packages/aur.pkglist"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/dev-fullstack.pkglist"
   "$repo_root/scripts/stow.sh"
+  "$repo_root/scripts/post-install.sh"
   "sudo systemctl enable --now NetworkManager"
   "sudo systemctl enable --now bluetooth"
   "sudo systemctl enable --now earlyoom"
+  "sudo systemctl enable docker.socket"
   "sudo systemctl enable sddm"
+  "chsh -s /usr/bin/zsh"
 )
 
 echo "Arch Fullstack Dotfiles bootstrap"

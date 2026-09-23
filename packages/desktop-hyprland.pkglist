@@ -1,6 +1,8 @@
 hyprland
 hyprpaper
 xdg-desktop-portal-hyprland
+xdg-desktop-portal
+xdg-desktop-portal-gtk
 waybar
 rofi
 ghostty
@@ -29,3 +31,13 @@ thunar-archive-plugin
 file-roller
 rofi-emoji
 chromium
+sddm
+gvfs
+tumbler
+ffmpegthumbnailer
+adw-gtk-theme
+imv
+mpv
+zathura
+zathura-pdf-mupdf
+mousepad

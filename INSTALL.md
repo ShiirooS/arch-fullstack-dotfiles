@@ -52,16 +52,29 @@ Verificar la config de Hyprland sin arrancarlo:
 Hyprland --verify-config -c ~/.config/hypr/hyprland.conf
 ```
 
+Carpetas de usuario (`~/Pictures`, `~/Documents`, ...) y apps por defecto
+(thunar, chromium, imv, mpv, zathura, mousepad):
+
+```bash
+./scripts/post-install.sh
+```
+
 ## 4. Servicios y sistema
 
 ```bash
 sudo systemctl enable --now NetworkManager bluetooth earlyoom
+sudo systemctl enable docker.socket        # docker arranca recien al usarlo
 sudo systemctl enable sddm                 # login grafico
-sudo timedatectl set-timezone <Region/Ciudad>   # ej. America/Argentina/Buenos_Aires
+sudo timedatectl set-timezone <Region/Ciudad>   # ej. America/Panama
+chsh -s /usr/bin/zsh                       # shell por defecto (aplica al re-loguear)
 ```
 
-La zona horaria importa: el reloj de waybar y las horas de reinicio de la barra de
-Claude Code se muestran en hora local.
+- La zona horaria importa: el reloj de waybar y las horas de reinicio de la barra de
+  Claude Code se muestran en hora local.
+- Docker por socket en vez de `docker.service`: no ocupa RAM hasta el primer
+  `docker ...`. Si ya estaba el servicio: `sudo systemctl disable --now docker.service`.
+- `shell/.zshenv` agrega `~/.local/bin` al PATH (ahi vive `claude`); sin eso,
+  al pasar a zsh el comando `claude` no se encuentra.
 
 ## 5. Claude Code: barra de estado con oh-my-posh
 

@@ -2,7 +2,7 @@
 # Uso: screenshot.sh region | screen | edit
 set -euo pipefail
 
-dir="$HOME/Pictures/Screenshots"
+dir="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")/Screenshots"
 mkdir -p "$dir"
 
 case "${1:-region}" in

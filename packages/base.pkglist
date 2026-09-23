@@ -22,12 +22,15 @@ tmux
 lazygit
 fastfetch
 earlyoom
+upower
+xdg-user-dirs
 networkmanager
 bluez
 bluez-utils
 pipewire
 pipewire-pulse
 wireplumber
+rtkit
 pavucontrol
 brightnessctl
 playerctl
