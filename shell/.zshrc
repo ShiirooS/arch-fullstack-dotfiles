@@ -38,3 +38,11 @@ eval "$(starship init zsh)"
 if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
+
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+
+[[ -r /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] \
+  && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Tiene que ir ultimo: envuelve los widgets de zle definidos antes.
+[[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] \
+  && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

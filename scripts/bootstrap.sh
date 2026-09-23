@@ -21,6 +21,8 @@ steps=(
   "sudo systemctl enable --now NetworkManager"
   "sudo systemctl enable --now bluetooth"
   "sudo systemctl enable --now earlyoom"
+  "sudo systemctl enable --now power-profiles-daemon"
+  "sudo systemctl enable --now paccache.timer"
   "sudo systemctl enable docker.socket"
   "sudo systemctl enable sddm"
   "chsh -s /usr/bin/zsh"

@@ -11,6 +11,8 @@ man-pages
 less
 nano
 zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
 fzf
 ripgrep
 fd
@@ -22,6 +24,9 @@ tmux
 lazygit
 fastfetch
 earlyoom
+power-profiles-daemon
+pacman-contrib
+fwupd
 upower
 xdg-user-dirs
 networkmanager

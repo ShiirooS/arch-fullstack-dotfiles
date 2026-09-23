@@ -76,6 +76,8 @@ asi no se edita `metadata.desktop`, que el paquete pisa en cada actualizacion.
 
 ```bash
 sudo systemctl enable --now NetworkManager bluetooth earlyoom
+sudo systemctl enable --now power-profiles-daemon   # perfiles de energia (powerprofilesctl)
+sudo systemctl enable --now paccache.timer          # limpia la cache de pacman (deja 3 versiones)
 sudo systemctl enable docker.socket        # docker arranca recien al usarlo
 sudo systemctl enable sddm                 # login grafico
 sudo timedatectl set-timezone <Region/Ciudad>   # ej. America/Panama
@@ -163,3 +165,12 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 | `SUPER + Shift + Control + Escape` | Salir de Hyprland |
 
 Las capturas se guardan en `~/Pictures/Screenshots`.
+
+## Notas de mantenimiento
+
+- `config/.config/pacman/makepkg.conf` desactiva `debug` para builds de AUR (yay
+  deja de instalar paquetes `*-debug`).
+- git: identidad global en `git/.gitconfig` (email noreply de GitHub). Para repos de
+  trabajo: `git config user.email <otro>` dentro de ese repo.
+- Firmware: `fwupdmgr refresh && fwupdmgr get-updates` para ver actualizaciones de
+  BIOS/firmware; aplicarlas con `fwupdmgr update` (a mano, conectado a corriente).
