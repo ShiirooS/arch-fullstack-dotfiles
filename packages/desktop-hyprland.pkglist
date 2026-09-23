@@ -32,6 +32,7 @@ file-roller
 rofi-emoji
 chromium
 sddm
+xorg-server
 gvfs
 tumbler
 ffmpegthumbnailer

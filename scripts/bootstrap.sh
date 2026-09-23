@@ -14,6 +14,7 @@ steps=(
   "$repo_root/scripts/install-packages.sh $repo_root/packages/desktop-hyprland.pkglist"
   "$repo_root/scripts/install-aur-helper.sh"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/aur.pkglist"
+  "sudo $repo_root/scripts/setup-sddm.sh"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/dev-fullstack.pkglist"
   "$repo_root/scripts/stow.sh"
   "$repo_root/scripts/post-install.sh"

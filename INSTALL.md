@@ -59,6 +59,19 @@ Carpetas de usuario (`~/Pictures`, `~/Documents`, ...) y apps por defecto
 ./scripts/post-install.sh
 ```
 
+## Pantalla de login (SDDM)
+
+Tema `sddm-astronaut-theme` (AUR, viene en `aur.pkglist`) con la variante animada
+`hyprland_kath`:
+
+```bash
+sudo ./scripts/setup-sddm.sh                 # o: sudo ./scripts/setup-sddm.sh pixel_sakura
+sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/sddm-astronaut-theme   # vista previa
+```
+
+La variante se elige con `Themes/astronaut.conf.user` (SDDM lo superpone al tema),
+asi no se edita `metadata.desktop`, que el paquete pisa en cada actualizacion.
+
 ## 4. Servicios y sistema
 
 ```bash
