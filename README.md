@@ -39,10 +39,12 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 │   ├── base.pkglist
 │   ├── desktop-hyprland.pkglist
 │   ├── dev-fullstack.pkglist
+│   ├── aur.pkglist
 │   └── optional.pkglist
 ├── scripts/
 │   ├── bootstrap.sh
 │   ├── install-packages.sh
+│   ├── install-aur-helper.sh
 │   └── stow.sh
 ├── config/
 │   └── .config/
@@ -74,9 +76,17 @@ O por partes:
 ```bash
 ./scripts/install-packages.sh packages/base.pkglist
 ./scripts/install-packages.sh packages/desktop-hyprland.pkglist
+./scripts/install-aur-helper.sh
+./scripts/install-packages.sh packages/aur.pkglist
 ./scripts/install-packages.sh packages/dev-fullstack.pkglist
 ./scripts/stow.sh
 ```
+
+`packages/aur.pkglist` contiene paquetes que no estan en pacman oficial (por ejemplo
+`rofi-wayland`, `wlogout`). `install-aur-helper.sh` instala `yay` desde AUR (build con
+`makepkg`, sin `curl | bash`) si no hay ya un helper (`yay`/`paru`) presente; luego
+`install-packages.sh` detecta que el pkglist es `aur.pkglist` y usa ese helper en vez
+de `pacman` directo.
 
 ## Notas para 8 GB RAM
 

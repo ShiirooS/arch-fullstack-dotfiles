@@ -12,6 +12,8 @@ steps=(
   "sudo pacman -Syu"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/base.pkglist"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/desktop-hyprland.pkglist"
+  "$repo_root/scripts/install-aur-helper.sh"
+  "$repo_root/scripts/install-packages.sh $repo_root/packages/aur.pkglist"
   "$repo_root/scripts/install-packages.sh $repo_root/packages/dev-fullstack.pkglist"
   "$repo_root/scripts/stow.sh"
   "sudo systemctl enable --now NetworkManager"
