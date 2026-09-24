@@ -52,6 +52,7 @@ tooltip {
 #tray,
 #bluetooth,
 #network,
+#power-profiles-daemon,
 #battery,
 #pulseaudio,
 #clock {
@@ -63,6 +64,7 @@ tooltip {
 #custom-power:hover,
 #bluetooth:hover,
 #network:hover,
+#power-profiles-daemon:hover,
 #battery:hover,
 #pulseaudio:hover,
 #clock:hover {
@@ -75,6 +77,18 @@ tooltip {
 
 #network {
     color: @green;
+}
+
+#power-profiles-daemon {
+    color: @green;
+}
+
+#power-profiles-daemon.power-saver {
+    color: @blue;
+}
+
+#power-profiles-daemon.performance {
+    color: @red;
 }
 
 #battery {
