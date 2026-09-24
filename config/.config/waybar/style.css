@@ -124,3 +124,12 @@ tooltip {
     background-color: alpha(@select, 0.8);
     border-bottom: 2px solid @pink;
 }
+
+#custom-updates {
+    color: @yellow;
+    padding: 0 10px;
+}
+
+#custom-updates:hover {
+    background-color: alpha(@select, 0.6);
+}

@@ -177,7 +177,9 @@ Las capturas se guardan en `~/Pictures/Screenshots`.
 
 Barra superior (waybar): workspaces a la izquierda, barra de tareas con las
 ventanas abiertas al centro (click: enfocar, click medio: cerrar, click derecho:
-minimizar) y estado del sistema a la derecha.
+minimizar) y estado del sistema a la derecha. El contador `󰚰 N` muestra
+actualizaciones pendientes (oficiales + AUR, se revisa cada hora) y con un click
+abre `yay -Syu` en una terminal.
 
 ## Notas de mantenimiento
 

@@ -1,7 +1,7 @@
 {
     "modules-left": ["custom/power", "hyprland/workspaces"],
     "modules-center": ["wlr/taskbar"],
-    "modules-right": ["tray", "bluetooth", "network", "power-profiles-daemon", "battery", "pulseaudio", "clock"],
+    "modules-right": ["custom/updates", "tray", "bluetooth", "network", "power-profiles-daemon", "battery", "pulseaudio", "clock"],
 
     "custom/power": {
         "format" : "⭘ ",
@@ -28,6 +28,14 @@
         "format-disabled": " 󰂲 ",
         "format-connected": " 󰂱 ",
         "on-click": "blueman-manager",
+    },
+
+    "custom/updates": {
+        "exec": "~/.config/waybar/scripts/updates.sh",
+        "return-type": "json",
+        "interval": 3600,
+        "signal": 8,
+        "on-click": "~/.config/waybar/scripts/updates.sh run"
     },
 
     "wlr/taskbar": {
