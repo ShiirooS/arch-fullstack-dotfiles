@@ -156,9 +156,17 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 | `SUPER + Shift + E` | Captura y editar con swappy |
 | `SUPER + Q` | Cerrar ventana |
 | `SUPER + Shift + Q` | Matar ventana |
-| `SUPER + F` | Alternar flotante |
+| `SUPER + F` | Alternar flotante (no es pantalla completa) |
 | `SUPER + P` | Pseudotile |
 | `SUPER + J` | Alternar split |
+| `SUPER + Shift + F` | Pantalla completa |
+| `SUPER + M` | Maximizar (mantiene la barra) |
+| `SUPER + C` | Centrar ventana flotante |
+| `SUPER + Tab` | Workspace anterior |
+| `SUPER + S` | Mostrar/ocultar scratchpad |
+| `SUPER + Alt + S` | Mandar ventana al scratchpad |
+| `SUPER + Shift + flechas` | Mover ventana |
+| `SUPER + Control + flechas` | Redimensionar ventana |
 | `SUPER + 1..0` | Ir al workspace 1..10 |
 | `SUPER + Shift + 1..0` | Mover ventana al workspace 1..10 |
 | `SUPER + flechas` | Mover foco |
@@ -166,6 +174,10 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 | `SUPER + Shift + Control + Escape` | Salir de Hyprland |
 
 Las capturas se guardan en `~/Pictures/Screenshots`.
+
+Barra superior (waybar): workspaces a la izquierda, barra de tareas con las
+ventanas abiertas al centro (click: enfocar, click medio: cerrar, click derecho:
+minimizar) y estado del sistema a la derecha.
 
 ## Notas de mantenimiento
 

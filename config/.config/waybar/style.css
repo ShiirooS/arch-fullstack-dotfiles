@@ -108,3 +108,19 @@ tooltip {
     margin-left: 10px;
     padding: 0px 10px 0 15px;
 }
+
+#taskbar button {
+    border: none;
+    border-radius: 4px;
+    padding: 0 4px;
+    margin: 0 1px;
+}
+
+#taskbar button:hover {
+    background-color: alpha(@select, 0.6);
+}
+
+#taskbar button.active {
+    background-color: alpha(@select, 0.8);
+    border-bottom: 2px solid @pink;
+}
