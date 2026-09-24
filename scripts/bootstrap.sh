@@ -23,6 +23,7 @@ steps=(
   "sudo systemctl enable --now earlyoom"
   "sudo systemctl enable --now power-profiles-daemon"
   "sudo systemctl enable --now paccache.timer"
+  "systemctl --user enable --now batsignal"
   "sudo systemctl enable docker.socket"
   "sudo systemctl enable sddm"
   "chsh -s /usr/bin/zsh"

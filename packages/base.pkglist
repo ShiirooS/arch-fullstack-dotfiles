@@ -28,6 +28,8 @@ power-profiles-daemon
 pacman-contrib
 fwupd
 upower
+batsignal
+gnome-keyring
 xdg-user-dirs
 networkmanager
 bluez

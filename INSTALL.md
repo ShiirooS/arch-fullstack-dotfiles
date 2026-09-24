@@ -78,6 +78,7 @@ asi no se edita `metadata.desktop`, que el paquete pisa en cada actualizacion.
 sudo systemctl enable --now NetworkManager bluetooth earlyoom
 sudo systemctl enable --now power-profiles-daemon   # perfiles de energia (powerprofilesctl)
 sudo systemctl enable --now paccache.timer          # limpia la cache de pacman (deja 3 versiones)
+systemctl --user enable --now batsignal              # aviso de bateria baja
 sudo systemctl enable docker.socket        # docker arranca recien al usarlo
 sudo systemctl enable sddm                 # login grafico
 sudo timedatectl set-timezone <Region/Ciudad>   # ej. America/Panama
@@ -174,3 +175,7 @@ Las capturas se guardan en `~/Pictures/Screenshots`.
   trabajo: `git config user.email <otro>` dentro de ese repo.
 - Firmware: `fwupdmgr refresh && fwupdmgr get-updates` para ver actualizaciones de
   BIOS/firmware; aplicarlas con `fwupdmgr update` (a mano, conectado a corriente).
+- Llavero: `gnome-keyring` se desbloquea solo al entrar por SDDM (PAM). Chromium lo
+  usa por `config/.config/chromium-flags.conf` (`--password-store=gnome-libsecret`).
+  Para mover el token de `gh` del archivo en texto plano al llavero:
+  `gh auth login --with-token <<< "$(gh auth token)"`.
