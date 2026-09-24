@@ -26,7 +26,7 @@ sudo pacman -Syu
 ./scripts/install-packages.sh packages/base.pkglist
 ./scripts/install-packages.sh packages/desktop-hyprland.pkglist
 ./scripts/install-aur-helper.sh                     # instala yay si no hay helper
-./scripts/install-packages.sh packages/aur.pkglist  # wlogout, oh-my-posh-bin
+./scripts/install-packages.sh packages/aur.pkglist  # wlogout, oh-my-posh-bin, sddm-astronaut-theme
 ./scripts/install-packages.sh packages/dev-fullstack.pkglist
 ```
 
