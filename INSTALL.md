@@ -26,7 +26,7 @@ sudo pacman -Syu
 ./scripts/install-packages.sh packages/base.pkglist
 ./scripts/install-packages.sh packages/desktop-hyprland.pkglist
 ./scripts/install-aur-helper.sh                     # instala yay si no hay helper
-./scripts/install-packages.sh packages/aur.pkglist  # wlogout, oh-my-posh-bin, sddm-astronaut-theme
+./scripts/install-packages.sh packages/aur.pkglist  # wlogout, oh-my-posh, sddm-astronaut, cursor/iconos macOS, fzf-tab, tpm, pokemon
 ./scripts/install-packages.sh packages/dev-fullstack.pkglist
 ```
 
@@ -52,8 +52,9 @@ Verificar la config de Hyprland sin arrancarlo:
 Hyprland --verify-config -c ~/.config/hypr/hyprland.conf
 ```
 
-Carpetas de usuario (`~/Pictures`, `~/Documents`, ...) y apps por defecto
-(thunar, chromium, imv, mpv, zathura, mousepad):
+Carpetas de usuario (`~/Pictures`, `~/Documents`, ...), apps por defecto
+(thunar, chromium, imv, mpv, zathura, mousepad), cache de fuentes, apps fijadas
+en el dock y plugins de tmux:
 
 ```bash
 ./scripts/post-install.sh
@@ -71,6 +72,29 @@ sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/sddm-astronaut-theme
 
 La variante se elige con `Themes/astronaut.conf.user` (SDDM lo superpone al tema),
 asi no se edita `metadata.desktop`, que el paquete pisa en cada actualizacion.
+
+Neovim instala sus plugins solo la primera vez que se abre (lazy.nvim), y despues
+los servidores LSP y formateadores con mason. Para hacerlo sin abrirlo:
+
+```bash
+nvim --headless "+Lazy! sync" +qa
+```
+
+## Estilo macOS
+
+- Cursor `macOS` (`apple_cursor`) en Hyprland, GTK, Qt y SDDM.
+- Iconos `WhiteSur-dark` (`whitesur-icon-theme`). Papirus sigue instalado; para volver:
+
+  ```bash
+  ./scripts/set-icon-theme.sh Papirus-Dark      # o WhiteSur-dark
+  ```
+
+- Fuente de interfaz Inter (parecida a San Francisco), codigo en JetBrainsMono Nerd
+  Font (`config/.config/fontconfig/fonts.conf`).
+- Dock abajo (`nwg-dock-hyprland`, `hypr/scripts/dock.sh`): apps fijadas y abiertas,
+  boton lanzador que abre rofi. Click derecho en un icono para fijar/desfijar. Para
+  que se oculte solo, cambiar `-x` por `-d` en `dock.sh`.
+- Wallpaper con `awww`: transicion animada al cambiarlo (`SUPER + W`).
 
 ## 4. Servicios y sistema
 
@@ -121,15 +145,15 @@ echo '{"model":{"display_name":"Test"},"context_window":{"context_window_size":2
 
 Cerrar sesion y volver a entrar (SDDM, sesion "Hyprland"). Deberia verse:
 
-- wallpaper (`hyprpaper`), waybar arriba, notificaciones (swaync), applet de red;
-- tema oscuro en apps GTK y Qt, iconos Papirus;
+- wallpaper (`awww`), waybar arriba, dock abajo, notificaciones (swaync), applet de red;
+- tema oscuro en apps GTK y Qt, iconos WhiteSur, cursor macOS;
 - bloqueo automatico a los 5 min (`hypridle`).
 
 Chequeos rapidos:
 
 ```bash
-hyprctl hyprpaper listactive                      # wallpaper activo
-pgrep -a 'waybar|swaync|hypridle|hyprpaper|polkit-gnome'
+awww query                                        # wallpaper activo
+pgrep -a 'waybar|swaync|hypridle|awww-daemon|nwg-dock|polkit-gnome'
 notify-send "Prueba" "notificaciones OK"
 ```
 
@@ -175,11 +199,23 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 
 Las capturas se guardan en `~/Pictures/Screenshots`.
 
-Barra superior (waybar): workspaces a la izquierda, barra de tareas con las
-ventanas abiertas al centro (click: enfocar, click medio: cerrar, click derecho:
-minimizar) y estado del sistema a la derecha. El contador `󰚰 N` muestra
+Barra superior (waybar): workspaces a la izquierda y estado del sistema a la
+derecha. Las ventanas abiertas se ven en el dock de abajo. El contador `󰚰 N` muestra
 actualizaciones pendientes (oficiales + AUR, se revisa cada hora) y con un click
 abre `yay -Syu` en una terminal.
+
+## Terminal
+
+- zsh con el prompt de ViegPhunt (oh-my-posh, `shell/.config/ohmyposh/viet.omp.json`),
+  autocompletado con vista previa (`fzf-tab`), sugerencias y resaltado. Un pokemon
+  al abrir la terminal (`pokemon-colorscripts`).
+- tmux: prefijo `Ctrl + Z`. `prefijo + H` / `V` dividir, `N` ventana nueva (en la
+  carpeta actual), `W` / `S` renombrar ventana/sesion, `Q` cerrar ventana, `r`
+  recargar, `I` instalar plugins.
+- Neovim (config de ViegPhunt adaptada a fullstack): `Space e` arbol de archivos,
+  `Space ff` / `Space fg` buscar archivos / texto, `Space gf` formatear,
+  `` Space ` `` terminal, `Space /` comentar, `K` documentacion, `Space w` guardar.
+- Extras: `cava` (visualizador de audio), `btop`, `lazydocker` (`lzd`), `lazygit` (`lg`).
 
 ## Notas de mantenimiento
 

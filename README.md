@@ -12,8 +12,10 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 
 ## Referencias analizadas
 
-- ViegPhunt/Arch-Hyprland: instalador de sistema para Hyprland.
+- ViegPhunt/Arch-Hyprland: instalador de sistema para Hyprland (y su script de
+  terminal, ViegPhunt/auto-setup-LT).
 - ViegPhunt/Dotfiles: configuraciones de Hyprland, Waybar, Ghostty, Rofi, Zsh, Tmux y Neovim usando Stow.
+- ViegPhunt/Wallpaper-Collection: los 8 wallpapers de `wallpapers/`.
 
 ## Que se reutiliza como idea
 
@@ -33,12 +35,14 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 
 ## Que incluye
 
-- Hyprland 0.56 (config legacy `hyprland.conf` modular), hyprlock, hypridle, hyprpaper.
-- Waybar con workspaces, barra de tareas, perfil de energia, bateria, audio y reloj.
+- Hyprland 0.56 (config legacy `hyprland.conf` modular), hyprlock, hypridle, awww.
+- Waybar con workspaces, actualizaciones, perfil de energia, bateria, audio y reloj.
+- Estilo macOS: dock (nwg-dock-hyprland), cursor macOS, iconos WhiteSur, fuente Inter.
 - Rofi (apps, emojis, portapapeles, wallpapers, atajos), SwayNC, Wlogout.
 - Login SDDM con `sddm-astronaut-theme` (variante animada `hyprland_kath`).
-- Tema oscuro Catppuccin en todo: GTK3 (adw-gtk3-dark), GTK4, Qt (qt6ct + Kvantum), iconos Papirus.
-- zsh + starship + zoxide + fzf + direnv + autosuggestions + syntax highlighting.
+- Tema oscuro Catppuccin en todo: GTK3 (adw-gtk3-dark), GTK4, Qt (qt6ct + Kvantum).
+- zsh + prompt oh-my-posh de ViegPhunt + fzf-tab + zoxide + direnv + autosuggestions + syntax highlighting.
+- tmux (Catppuccin, prefijo Ctrl+Z) y Neovim con LSP, telescope, neo-tree y autocompletado.
 - Statusline de Claude Code con oh-my-posh (contexto, limites de 5h y semanal).
 - Mantenimiento: paccache, power-profiles-daemon, batsignal, gnome-keyring, fwupd.
 
@@ -53,21 +57,24 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 │   ├── install-packages.sh
 │   ├── install-aur-helper.sh
 │   ├── stow.sh            # respalda conflictos en .bak-<fecha> y enlaza
-│   ├── post-install.sh    # carpetas xdg y apps por defecto
+│   ├── post-install.sh    # carpetas xdg, apps por defecto, dock, plugins tmux
+│   ├── set-icon-theme.sh  # WhiteSur-dark <-> Papirus-Dark
 │   └── setup-sddm.sh      # tema de login (sudo)
 ├── config/
 │   ├── .config/
 │   │   ├── colors/        # paleta Catppuccin compartida (css/rasi)
-│   │   ├── hypr/          # hyprland, hyprlock, hypridle, hyprpaper, scripts/
-│   │   ├── waybar/ rofi/ swaync/ wlogout/ ghostty/
+│   │   ├── hypr/          # hyprland, hyprlock, hypridle, scripts/ (wallpaper, dock...)
+│   │   ├── waybar/ rofi/ swaync/ wlogout/ ghostty/ nwg-dock-hyprland/ cava/
+│   │   ├── fontconfig/    # Inter para interfaz, JetBrainsMono para codigo
 │   │   ├── gtk-3.0/ gtk-4.0/ qt6ct/ Kvantum/
 │   │   ├── pacman/makepkg.conf     # builds de AUR sin paquetes -debug
 │   │   ├── xfce4/helpers.rc        # thunar abre ghostty
 │   │   └── chromium-flags.conf     # Wayland nativo + llavero
+│   ├── .icons/default/    # cursor macOS por defecto
 │   └── .local/share/xfce4/helpers/
 ├── claude/.config/ohmyposh/claude.toml   # statusline de Claude Code
 ├── wallpapers/
-├── shell/ (.zshrc, .zshenv)   tmux/   git/   nvim/
+├── shell/ (.zshrc, .zshenv, prompt oh-my-posh)   tmux/   git/   nvim/
 ```
 
 ## Instalacion propuesta
@@ -92,7 +99,8 @@ O por partes:
 ```
 
 `packages/aur.pkglist` contiene paquetes que no estan en pacman oficial (`wlogout`,
-`oh-my-posh-bin`, `sddm-astronaut-theme`). `install-aur-helper.sh` instala `yay` desde AUR (build con
+`oh-my-posh-bin`, `sddm-astronaut-theme`, cursor e iconos macOS, `fzf-tab`, tpm y
+`pokemon-colorscripts-git`). `install-aur-helper.sh` instala `yay` desde AUR (build con
 `makepkg`, sin `curl | bash`) si no hay ya un helper (`yay`/`paru`) presente; luego
 `install-packages.sh` detecta que el pkglist es `aur.pkglist` y usa ese helper en vez
 de `pacman` directo.

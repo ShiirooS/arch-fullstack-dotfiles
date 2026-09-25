@@ -1,6 +1,7 @@
 {
     "modules-left": ["custom/power", "hyprland/workspaces"],
-    "modules-center": ["wlr/taskbar"],
+    // Las ventanas abiertas se ven en el dock de abajo (nwg-dock-hyprland).
+    "modules-center": [],
     "modules-right": ["custom/updates", "tray", "bluetooth", "network", "power-profiles-daemon", "battery", "pulseaudio", "clock"],
 
     "custom/power": {
@@ -36,16 +37,6 @@
         "interval": 3600,
         "signal": 8,
         "on-click": "~/.config/waybar/scripts/updates.sh run"
-    },
-
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 16,
-        "icon-theme": "Papirus-Dark",
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "on-click-right": "minimize-raise"
     },
 
     "network": {

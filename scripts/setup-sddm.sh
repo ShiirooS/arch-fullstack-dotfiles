@@ -16,9 +16,13 @@ fi
 [[ -f "$theme_dir/Themes/$variant.conf" ]] || { echo "No existe la variante $variant" >&2; exit 1; }
 
 install -d /etc/sddm.conf.d
-cat > /etc/sddm.conf.d/theme.conf <<'EOF'
+cursor=""
+# Mismo cursor que en la sesion (apple_cursor, AUR), si esta instalado.
+[[ -d /usr/share/icons/macOS ]] && cursor=$'CursorTheme=macOS\nCursorSize=24'
+cat > /etc/sddm.conf.d/theme.conf <<EOF
 [Theme]
 Current=sddm-astronaut-theme
+$cursor
 EOF
 
 # SDDM lee <ConfigFile>.user y sus valores pisan los del tema. Asi se elige la

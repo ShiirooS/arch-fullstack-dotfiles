@@ -1,3 +1,7 @@
 # Archivos que las apps escriben dentro de carpetas enlazadas por stow
 config/.config/gtk-3.0/bookmarks
 config/.config/gtk-3.0/servers
+
+# ~/.icons es un link a config/.icons: solo se versiona el cursor por defecto
+config/.icons/*
+!config/.icons/default/

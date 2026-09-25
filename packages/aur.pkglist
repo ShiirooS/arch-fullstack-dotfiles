@@ -2,3 +2,10 @@
 wlogout
 oh-my-posh-bin
 sddm-astronaut-theme
+# Estilo macOS (los mismos que ViegPhunt/Arch-Hyprland)
+apple_cursor
+whitesur-icon-theme
+# Terminal (ViegPhunt/auto-setup-LT)
+fzf-tab
+tmux-plugin-manager
+pokemon-colorscripts-git

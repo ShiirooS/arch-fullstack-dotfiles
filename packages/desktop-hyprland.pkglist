@@ -1,9 +1,10 @@
 hyprland
-hyprpaper
+awww
 xdg-desktop-portal-hyprland
 xdg-desktop-portal
 xdg-desktop-portal-gtk
 waybar
+nwg-dock-hyprland
 rofi
 ghostty
 swaync
@@ -42,3 +43,5 @@ mpv
 zathura
 zathura-pdf-mupdf
 mousepad
+inter-font
+cava
