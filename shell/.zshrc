@@ -21,6 +21,10 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475A \
 --color=border:#313244,label:#CDD6F4"
 
+# Atajos de fzf (Ctrl+R historial, Ctrl+T archivos). Antes de fzf-tab: si no,
+# fzf --zsh le quita la tecla Tab.
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
+
 # ─── Autocompletado ──────────────────────────────────────────────
 # zsh-completions (pacman) instala en site-functions, que ya esta en fpath.
 autoload -Uz compinit && compinit
@@ -80,7 +84,6 @@ venv() { _activate_venv "${1:-.venv}"; }
 
 # ─── Herramientas ────────────────────────────────────────────────
 eval "$(zoxide init zsh)"
-command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # Prompt de ViegPhunt (oh-my-posh). Si no esta, cae a starship.

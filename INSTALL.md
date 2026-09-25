@@ -30,6 +30,9 @@ sudo pacman -Syu
 ./scripts/install-packages.sh packages/dev-fullstack.pkglist
 ```
 
+`yay` hace preguntas (limpiar build, ver diffs): correrlo solo, no pegado junto con
+otros comandos, o las lineas siguientes se toman como respuestas.
+
 `packages/optional.pkglist` no se instala solo; son apps de AUR a eleccion:
 
 ```bash
@@ -78,6 +81,8 @@ los servidores LSP y formateadores con mason. Para hacerlo sin abrirlo:
 
 ```bash
 nvim --headless "+Lazy! sync" +qa
+# mason-lspconfig no instala servidores en modo headless: hacerlo a mano
+nvim --headless -c "MasonInstall lua-language-server pyright typescript-language-server html-lsp css-lsp json-lsp bash-language-server dockerfile-language-server" -c qa
 ```
 
 ## Estilo macOS
