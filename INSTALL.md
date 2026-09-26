@@ -33,11 +33,19 @@ sudo pacman -Syu
 `yay` hace preguntas (limpiar build, ver diffs): correrlo solo, no pegado junto con
 otros comandos, o las lineas siguientes se toman como respuestas.
 
-`packages/optional.pkglist` no se instala solo; son apps de AUR a eleccion:
+`packages/optional.pkglist` no se instala solo: apps a eleccion (VS Code, Postman,
+DBeaver, MongoDB Compass, Chrome, Obsidian, OnlyOffice, Discord, Spotify, Steam,
+Minecraft). Steam necesita el repo de 32 bits `[multilib]`:
 
 ```bash
+sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+sudo sed -i '/^#\[multilib\]$/{s/^#//;n;s/^#Include/Include/}' /etc/pacman.conf
+sudo pacman -Syu
 yay -S --needed $(grep -vE '^\s*(#|$)' packages/optional.pkglist)
 ```
+
+Chrome y VS Code leen `~/.config/chrome-flags.conf` / `code-flags.conf` (Wayland y
+llavero). Steam escala con `STEAM_FORCE_DESKTOPUI_SCALING` en `hypr/conf/environment.conf`.
 
 ## 3. Enlazar dotfiles
 

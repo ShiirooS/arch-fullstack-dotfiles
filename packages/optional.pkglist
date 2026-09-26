@@ -1,10 +1,24 @@
-# Estos paquetes pueden requerir AUR/helper como yay o paru.
+# Apps a eleccion (no las instala bootstrap.sh). Mezcla repos oficiales y AUR:
+#   yay -S --needed $(grep -vE '^\s*(#|$)' packages/optional.pkglist)
+# steam y lib32-* necesitan el repo [multilib] habilitado en /etc/pacman.conf.
+
+# Desarrollo
+visual-studio-code-bin
+postman-bin
+dbeaver
+mongodb-compass-bin
+
+# Navegador, notas y oficina
+google-chrome
 obsidian
+onlyoffice-bin
+
+# Comunicacion y musica
 discord
 spotify-launcher
-visual-studio-code-bin
-google-chrome
-postman-bin
-mongodb-compass
-dbeaver
-onlyoffice-bin
+
+# Juegos (drivers Vulkan de Intel de 64 y 32 bits)
+steam
+minecraft-launcher
+lib32-vulkan-intel
+lib32-mesa
