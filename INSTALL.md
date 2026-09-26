@@ -185,7 +185,7 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 | `SUPER + Shift + E` | Captura y editar con swappy |
 | `SUPER + Q` | Cerrar ventana |
 | `SUPER + Shift + Q` | Matar ventana |
-| `SUPER + F` | Alternar flotante (no es pantalla completa) |
+| `SUPER + F` | Alternar flotante: ventana centrada al 70% (no es pantalla completa) |
 | `SUPER + P` | Pseudotile |
 | `SUPER + J` | Alternar split |
 | `SUPER + Shift + F` | Pantalla completa |
@@ -223,6 +223,14 @@ abre `yay -Syu` en una terminal.
 - Extras: `cava` (visualizador de audio), `btop`, `lazydocker` (`lzd`), `lazygit` (`lg`).
 
 ## Notas de mantenimiento
+
+- TPM: con systemd 262 cuatro servicios de medicion (NvPCR) fallan en cada arranque
+  porque el TPM de la laptop no tiene ese indice. El disco no esta cifrado y nada usa
+  esas medidas, asi que se desactivan:
+  `sudo systemctl mask systemd-pcrproduct.service systemd-pcrlogin@.service systemd-tpm2-setup-early.service && sudo systemctl reset-failed`.
+  Si algun dia se cifra el disco con TPM (`systemd-cryptenroll`), revertir con `unmask`.
+- Ventanas chicas (volumen, bluetooth, red, dialogos de archivos, picture-in-picture)
+  abren flotantes y centradas: `hypr/conf/windowrule.conf`.
 
 - `config/.config/pacman/makepkg.conf` desactiva `debug` para builds de AUR (yay
   deja de instalar paquetes `*-debug`).
