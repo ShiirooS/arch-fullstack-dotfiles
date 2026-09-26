@@ -45,7 +45,7 @@ yay -S --needed $(grep -vE '^\s*(#|$)' packages/optional.pkglist)
 ```
 
 Chrome y VS Code leen `~/.config/chrome-flags.conf` / `code-flags.conf` (Wayland y
-llavero). Steam escala con `STEAM_FORCE_DESKTOPUI_SCALING` en `hypr/conf/environment.conf`.
+llavero). Spotify corre nativo en Wayland por `~/.config/spotify-launcher.conf`. Steam escala con `STEAM_FORCE_DESKTOPUI_SCALING` en `hypr/conf/environment.conf`.
 
 ## 3. Enlazar dotfiles
 
