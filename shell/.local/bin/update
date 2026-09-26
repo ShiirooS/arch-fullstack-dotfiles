@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# update: actualiza todo con un solo comando.
+#   1. Sistema + AUR (yay -Syu): kernel, Hyprland, apps, Chrome, VS Code...
+#   2. Plugins de Neovim (lazy.nvim) y sus herramientas (mason)
+#   3. Plugins de tmux (tpm)
+#   4. Firmware: solo avisa si hay algo (instalarlo es manual, con corriente)
+#   5. Paquetes huerfanos: los lista y pregunta antes de borrar
+# Steam, Spotify y el launcher de Minecraft se actualizan solos al abrirlos.
+set -uo pipefail
+
+bold=$'\e[1;35m'; reset=$'\e[0m'
+step() { printf '\n%s==> %s%s\n' "$bold" "$1" "$reset"; }
+failed=()
+
+step "Sistema y AUR"
+yay -Syu || failed+=("yay")
+
+if command -v nvim >/dev/null; then
+  step "Plugins de Neovim"
+  nvim --headless "+Lazy! sync" +qa 2>&1 | grep -iE 'error|updated' || true
+  nvim --headless "+MasonToolsUpdateSync" +qa >/dev/null 2>&1 || true
+  echo "ok"
+fi
+
+tpm="$HOME/.tmux/plugins/tpm/bin/update_plugins"
+if [[ -x "$tpm" ]]; then
+  step "Plugins de tmux"
+  if tmux has-session 2>/dev/null; then
+    "$tpm" all || failed+=("tmux")
+  else
+    tmux new-session -d -s tpm-update && "$tpm" all; tmux kill-session -t tpm-update 2>/dev/null
+  fi
+fi
+
+if command -v fwupdmgr >/dev/null; then
+  step "Firmware"
+  fwupdmgr refresh >/dev/null 2>&1
+  if fwupdmgr get-updates --no-unreported-check >/dev/null 2>&1; then
+    echo "Hay actualizaciones de firmware: fwupdmgr update (conectado a corriente)"
+  else
+    echo "Sin actualizaciones de firmware"
+  fi
+fi
+
+mapfile -t orphans < <(pacman -Qdtq 2>/dev/null)
+if (( ${#orphans[@]} )); then
+  step "Paquetes huerfanos (nadie los usa)"
+  printf '%s\n' "${orphans[@]}"
+  read -rp "¿Borrarlos? [s/N] " ans
+  if [[ "$ans" =~ ^[sSyY]$ ]]; then sudo pacman -Rns "${orphans[@]}"; fi
+fi
+
+# Refrescar el contador de waybar.
+pkill -RTMIN+8 waybar 2>/dev/null || true
+
+if (( ${#failed[@]} )); then
+  printf '\n%sTermino con errores en: %s%s\n' "$bold" "${failed[*]}" "$reset"
+  exit 1
+fi
+# Al actualizar el kernel, pacman borra los modulos del que esta corriendo.
+if [[ ! -d "/usr/lib/modules/$(uname -r)" ]]; then
+  printf '\n%sSe actualizo el kernel: reinicia para usarlo.%s\n' "$bold" "$reset"
+fi
+printf '\n%sTodo actualizado.%s\n' "$bold" "$reset"

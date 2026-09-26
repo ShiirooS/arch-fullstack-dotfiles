@@ -231,6 +231,11 @@ abre `yay -Syu` en una terminal.
 
 ## Notas de mantenimiento
 
+- **Actualizar todo:** `update` (en `shell/.local/bin/update`, tambien con click en el
+  contador `󰚰` de waybar). Corre `yay -Syu` (sistema + AUR), plugins de Neovim y sus
+  herramientas de mason, plugins de tmux, revisa firmware, ofrece borrar paquetes
+  huerfanos y avisa si hay que reiniciar por un kernel nuevo.
+
 - TPM: con systemd 262 cuatro servicios de medicion (NvPCR) fallan en cada arranque
   porque el TPM de la laptop no tiene ese indice. El disco no esta cifrado y nada usa
   esas medidas, asi que se desactivan:

@@ -44,7 +44,7 @@ Esta base toma ideas del flujo de ViegPhunt, pero esta organizada para ser:
 - zsh + prompt oh-my-posh de ViegPhunt + fzf-tab + zoxide + direnv + autosuggestions + syntax highlighting.
 - tmux (Catppuccin, prefijo Ctrl+Z) y Neovim con LSP, telescope, neo-tree y autocompletado.
 - Statusline de Claude Code con oh-my-posh (contexto, limites de 5h y semanal).
-- Mantenimiento: paccache, power-profiles-daemon, batsignal, gnome-keyring, fwupd.
+- Mantenimiento: comando `update` (todo con un comando), paccache, power-profiles-daemon, batsignal, gnome-keyring, fwupd.
 
 ## Estructura
 

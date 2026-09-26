@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Sin argumentos: JSON para el modulo custom/updates de waybar.
-# "run": actualiza el sistema en una terminal y refresca el modulo.
+# "run": abre una terminal con `update` (todo: sistema, AUR, nvim, tmux, firmware).
 
 if [[ "${1:-}" == "run" ]]; then
-  exec ghostty -e zsh -c 'yay -Syu; pkill -RTMIN+8 waybar; read -sk1 "?Listo. Presiona una tecla para cerrar."'
+  exec ghostty -e zsh -c 'update; read -sk1 "?Presiona una tecla para cerrar."'
 fi
 
 official=$(checkupdates 2>/dev/null | wc -l)
