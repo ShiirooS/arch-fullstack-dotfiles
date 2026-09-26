@@ -193,11 +193,10 @@ Salen de `config/.config/hypr/conf/keybinding.conf` (`SUPER + H` los muestra en 
 | `SUPER + Shift + E` | Captura y editar con swappy |
 | `SUPER + Q` | Cerrar ventana |
 | `SUPER + Shift + Q` | Matar ventana |
-| `SUPER + F` | Alternar flotante: ventana centrada al 70% (no es pantalla completa) |
 | `SUPER + P` | Pseudotile |
 | `SUPER + J` | Alternar split |
 | `SUPER + Shift + F` | Pantalla completa |
-| `SUPER + M` | Maximizar (mantiene la barra) |
+| `SUPER + F` | Maximizar (mantiene la barra y el dock) |
 | `SUPER + C` | Centrar ventana flotante |
 | `SUPER + Tab` | Workspace anterior |
 | `SUPER + S` | Mostrar/ocultar scratchpad |
