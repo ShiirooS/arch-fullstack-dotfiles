@@ -15,3 +15,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(scripts .. "/gtk-theme.sh")
     hl.exec_cmd("hyprctl setcursor macOS 24")
 end)
+
+-- awww no pinta pantallas conectadas despues de arrancar (quedan en negro):
+-- reaplicar el wallpaper actual cada vez que se conecta un monitor.
+hl.on("monitor.added", function()
+    hl.exec_cmd(scripts .. "/wallpaper.sh restore")
+end)
