@@ -1,0 +1,5 @@
+return {
+    terminal    = "ghostty",
+    fileManager = "thunar",
+    browser     = "chromium",
+}
